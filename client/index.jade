@@ -1,0 +1,14 @@
+head
+	meta(name='viewport', content='width=device-width, initial-scale=1.0', charset="UTF-8")
+	title Marker
+body
+	h1 Welcome to Marker
+	+hello
+	.red
+	.blue
+
+template(name="hello")
+	button Click me
+	p You've pressed the button
+		span= counter
+		| times.
