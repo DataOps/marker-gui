@@ -13,16 +13,37 @@
 		left 100%
 		margin 30px
 		
+	.top-btn
+		position absolute
+		left -200px
+		top 5vh
+		background buttonColor2
+		border-color buttonBorderColor2
+		
+	.top-btn:hover
+		background buttonHoverColor2
+		
+	.top-btn-active
+		background buttonHoverColor2
+		text-decoration underline
+		
+	.text
+		transform translateX(calc(-50% + 75px))
+		border-radius 0 10px 10px 0
+		border-left 1px solid buttonBorderColor2
+		
+	.gui
+		transform translateX(calc(-50% - 75px))
+		border-radius 10px 0 0 10px
+		border-right 1px solid buttonBorderColor2
+		
 	.bot-btn
 		position absolute
 		bottom 5vh
 		
 	.import
-		right 0
+		left -200px
 		margin-left 30px
-
-	.show-import
-		left 0
 		
 	.shoot
 		right 0

@@ -9,9 +9,21 @@ if (Meteor.isClient) {
   Template.sidebar.events({
     'click .edit': function () {
       $('.sidebar').toggleClass('show-sidebar');
-      setTimeout(function () {
-        $('.import').toggleClass('show-import');
-      }, 250)
+      
+      var importPos = $('.import').css('left') == '-200px' ? '0' : '-200px';
+      $('.import').animate({
+        'left' : importPos
+      }, 100);
+      var topPos = $('.top-btn').css('left') == '-200px' ? '50%' : '-200px';
+      $('.top-btn').animate({
+        'left' : topPos
+      }, 200);
+    },
+    'click .top-btn': function (e) {
+      var t = $(e.target);
+      if (!(t.eq(0).hasClass('top-btn-active'))) {
+        $('.top-btn').toggleClass('top-btn-active')
+      }
     }
   });
 }
