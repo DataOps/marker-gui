@@ -2,10 +2,17 @@ head
 	meta(name='viewport', content='width=device-width, initial-scale=1.0', charset="UTF-8")
 	title Marker
 body
-	h1 Welcome to Marker
+	.main
 	+hello
 	.red
 	.blue
+	.sidebar
+		button.edit
+			| EDIT
+		button.import.botBtn
+			| IMPORT DATA
+		button.shoot.botBtn
+			| SHOOT
 
 template(name="hello")
 	button Click me

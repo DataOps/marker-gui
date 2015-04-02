@@ -1,0 +1,38 @@
+// @import '../modules/_variables'
+// @import '../jeet/index'
+
+html, body
+	margin 0
+	padding 0
+	
+body
+	height 100vh
+	width 100vw
+	background lightColor
+	
+.red
+	background-color blue
+	height 20vh
+	col(1/2)
+	
+.blue
+	background-color red
+	height 20vh
+	col(1/2)
+	
+button
+	transition 0.2s
+	width 150px
+	white-space nowrap
+	background buttonColor
+	color lightColor
+	font-weight bold
+	outline none
+	border-radius 10px
+	border none
+	border-bottom 3px solid buttonBorderColor
+	padding 20px 40px
+	cursor pointer
+		
+button:hover
+	background: buttonHoverColor
