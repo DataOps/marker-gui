@@ -17,6 +17,7 @@ if (Meteor.isClient) {
       $('.top-btn').animate({
         'left' : topPos
       }, 200);
+      // $('#editor').css({'height': 'calc(100% - 140px - 5vh)', 'width': '90%'});
     },
     'click .top-btn': function (e) {
       var t = $(e.target);
