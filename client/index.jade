@@ -3,13 +3,15 @@ head
 	title Marker
 body
 	.main
-	.red
-	.blue
 	+sidebar
 
 template(name="sidebar")
 	.sidebar
-		div(id="editor")
+		#editor
+		button.gui.top-btn
+			| GUI
+		button.text.top-btn.top-btn-active
+			| TEXT
 		button.edit
 			| EDIT
 		button.import.bot-btn
