@@ -4,17 +4,21 @@ head
 body
 	.main
 	+sidebar
+	+graphspace
 
 template(name="sidebar")
 	.sidebar
+		button.edit
+			| EDIT
 		#editor
 		button.gui.top-btn
 			| GUI
 		button.text.top-btn.top-btn-active
 			| TEXT
-		button.edit
-			| EDIT
 		button.import.bot-btn
 			| IMPORT DATA
 		button.shoot.bot-btn
 			| SHOOT
+
+template(name="graphspace")
+	.graph
