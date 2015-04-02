@@ -9,3 +9,6 @@ autopublish
 insecure
 stylus
 mquandalle:jade
+mandrill:ace
+dcsan:reactive-ace
+arch:ace-editor

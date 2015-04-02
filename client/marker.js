@@ -2,6 +2,17 @@ if (Meteor.isClient) {
   // counter starts at 0
   Session.setDefault('counter', 0);
 
+  //var editor = MandrillAce.getInstance();
+  // editor.setValue("Sooper!");
+
+  // var editor = new ReactiveAce()
+  // editor.attach("editor");
+
+  var ace = AceEditor.instance("editor",{
+    theme:"monokai", 
+    mode:"html"
+  });
+
   Template.hello.helpers({
     counter: function () {
       return Session.get('counter');
