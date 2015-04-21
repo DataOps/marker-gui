@@ -31,7 +31,7 @@ template(name="pageHead")
 		.center
 			img.mt.inline.logo(src="/img/marker-logo-1.png")
 
-		.center
+		.center.mt
 			+pageNav
 
 template(name="pageNav")
@@ -55,13 +55,25 @@ template(name="aboutView")
 		section
 			header
 				h1 Team
-				ul
-					li: span Oscar Nilsson
-					li: span David Nääs
-					li: span Patrik Göthe
-					li: span Morhaf Alaraj
-					li: span Jimmy Hedström
-					li: span John Hult
+				ul.inline-list.center
+					li
+						.portrait-frame
+						span Oscar Nilsson
+					li
+						.portrait-frame
+						span David Nääs
+					li
+						.portrait-frame
+						span Patrik Göthe
+					li
+						.portrait-frame
+						span Morhaf Alaraj
+					li
+						.portrait-frame
+						span Jimmy Hedström
+					li
+						.portrait-frame
+						span John Hult
 
 
 
@@ -80,13 +92,24 @@ template(name="sidebar")
 		#editor
 
 template(name="createView")
-	.half.parent-height
-		+sidebar
-	.half.parent-height
-		+graphspace
+	
+	section.mt2.main-width
+		.whole
+			.half.parent-height
+				+sidebar
+			.half.parent-height
+				+graphspace
 
 
 template(name="graphspace")
-	.graph.relative.flex-grid
+	.graph.relative.flex-grid.outline
+		.item
+		.item
+		.item
+		.item
 		//- .center-center
 		//- 	p graph view
+
+
+
+

@@ -1,8 +1,11 @@
 
-var ace = AceEditor.instance("editor",{
-  theme:"monokai", 
-  mode:"html"
-});
+
+Template.sidebar.rendered = function () {
+	var ace = AceEditor.instance("editor",{
+	  theme:"github", 
+	  mode:"html"
+	});
+};
 
 // Template.sidebar.events({
 //   'click .edit': function () {
