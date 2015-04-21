@@ -2,23 +2,91 @@ head
 	meta(name='viewport', content='width=device-width, initial-scale=1.0', charset="UTF-8")
 	title Marker
 body
-	.main
-	+sidebar
-	+graphspace
+
+//- layout template
+template(name="main")
+	+pageHead
+	main.relative
+		+yield
+
+template(name="index")
+	section.relative(style="min-height: 600px;")
+		.center-center
+			h1.center.spaced Here be screenshots
+			p.center Marker is a new way to deliver graphs
+
+	section.relative(style="min-height: 600px;")
+		.center-center
+			h1.center.spaced Because you're worth it
+			p.center Marker is a new way to deliver graphs
+
+	section
+		h1.center Try it for yourself!
+
+	section(style="height: 600px;")
+		+createView
+
+template(name="pageHead")
+	header.page-head
+		.center
+			img.mt.inline.logo(src="/img/marker-logo-1.png")
+
+		.center
+			+pageNav
+
+template(name="pageNav")
+	nav
+		ul.inline-list.no-style-type
+			li: a.foreground(href="/") Home
+			li: a.foreground(href="/create") Create
+			li: a.foreground(href="/about") about
+
+template(name="aboutView")
+	.mid-width
+		h1 About
+
+		section
+			p Data  science and Big  data  are  expressions  that  have  become  popularised during the last couple of years.  Since entering the connected information age, our society have grown more and more dependant on analysing data and processing information for continuous improvement, from an ever increasing amount of data collected both from internet connected sensors and tracking of our behaviour using digital devices. In many business ventures, using these methods of tracking data have become essential to stay competitive and relevant.  
+
+			p Organisations invest an increasing amount of resources trying to extract every possible statistic about customers, users and employees in order to gain a competitive advantage. On the internet, every possible action of a website that might be of interest is tracked, and most people see prompts daily that encourage us to take part in customer evaluations. All this data is then put to use, but with a plethora of different data sources, it is often hard to find the most relevant way to combine, visualise, and find the  permutation  of  gathered  values  that  ultimately gains you insight into what you were missing. An algorithm could utilise the raw data but it  lacks  meaning  for  the  human  mind  until  it  is  structured  and  presented visually. 
+
+			//- p However, not only businesses benefit from the use of data analysis. Journalists, bloggers, organisations and individuals also have access to data that they would like to use to their advantage, since the most powerful way to make a point, often is to back it up with comprehensible data and statistics. In order for this to be possible, more intuitive and "hands on" ways to handle and visualise data is required. Programs like Microsoft Excel excel at many tasks, but often require expert knowledge of every possible action to be made. It is often hard to find compatible ways to integrate data sources into  the  program, especially when data is dynamic and streamed live from the web.
+
+		section
+			header
+				h1 Team
+				ul
+					li: span Oscar Nilsson
+					li: span David Nääs
+					li: span Patrik Göthe
+					li: span Morhaf Alaraj
+					li: span Jimmy Hedström
+					li: span John Hult
+
+
 
 template(name="sidebar")
 	.sidebar.show-sidebar
 		button.edit
-			| EDIT
+			| Edit
+		button.gui
+			| Gui
+		button.text
+			| Text
+		button.import
+			| Import Data
+		button.shoot
+			| Shoot
 		#editor
-		button.gui.top-btn
-			| GUI
-		button.text.top-btn.top-btn-active
-			| TEXT
-		button.import.bot-btn
-			| IMPORT DATA
-		button.shoot.bot-btn
-			| SHOOT
+
+template(name="createView")
+	.half.parent-height
+		+sidebar
+	.half.parent-height
+		+graphspace
+
 
 template(name="graphspace")
-	.graph
+	.graph.relative.flex-grid
+		//- .center-center
+		//- 	p graph view
