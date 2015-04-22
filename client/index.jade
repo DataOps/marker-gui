@@ -36,10 +36,10 @@ template(name="pageHead")
 
 template(name="pageNav")
 	nav
-		ul.inline-list.no-style-type
+		ul.inline-list.no-style-type.nav-list
 			li: a.foreground(href="/") Home
 			li: a.foreground(href="/create") Create
-			li: a.foreground(href="/about") about
+			li: a.foreground(href="/about") About
 
 template(name="aboutView")
 	.mid-width
@@ -79,15 +79,13 @@ template(name="aboutView")
 
 template(name="sidebar")
 	.sidebar.show-sidebar
-		button.edit
-			| Edit
-		button.gui
+		button.gui.green-btn
 			| Gui
-		button.text
+		button.text.green-btn
 			| Text
-		button.import
+		button.import.green-btn
 			| Import Data
-		button.shoot
+		button.shoot.right.purple-btn
 			| Shoot
 		#editor
 
