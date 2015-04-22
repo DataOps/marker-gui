@@ -10,14 +10,19 @@ template(name="main")
 		+yield
 
 template(name="index")
-	section.relative(style="min-height: 600px;")
+	section#particles.relative(style="min-height: 600px;")
 		.center-center
 			h1.center.spaced Here be screenshots
 			p.center Marker is a new way to deliver graphs
 
-	section.relative(style="min-height: 600px;")
+	section.splash-section.relative.accent-bg(style="min-height: 600px;")
+		.bg.texture.full(style="background-image:url('/textures/oranges_white.png'); opacity:0.1;")
 		.center-center
-			h1.center.spaced Because you're worth it
+			h1.center.spaced
+				| Because
+				span.bold.uppercase you
+				br 
+				| are worth it
 			p.center Marker is a new way to deliver graphs
 
 	section
@@ -28,14 +33,13 @@ template(name="index")
 
 template(name="pageHead")
 	header.page-head
-		.center
-			img.mt.inline.logo(src="/img/marker-logo-1.png")
-
-		.center.mt
-			+pageNav
+		.left
+			img.mt.inline.middle.logo(src="/img/marker-logo-1.png")
+			.inline.middle
+				+pageNav
 
 template(name="pageNav")
-	nav
+	nav.page-nav
 		ul.inline-list.no-style-type
 			li: a.foreground(href="/") Home
 			li: a.foreground(href="/create") Create

@@ -1,5 +1,27 @@
 header.page-head
 	background background
-	min-height 200px
 	.logo
-		max-width 300px
+		box-sizing border-box
+		padding 10px 15px
+		max-height 80px
+		margin 0
+	.page-nav
+		padding-top 8px
+		padding-bottom @padding-top
+		border-top 1px solid rgba(black,0.1)
+		border-bottom @border-top
+		font-size 0
+		li
+			&:not(:first-child) a
+				border-left 1px solid rgba(black,0.1)
+			a
+				text-transform capitalize
+				height 70px
+				font-size 16px
+				// background accent
+				padding 20px
+				font-weight 600
+				color rgba(black, 0.4)
+				&:hover
+					color rgba(black, 0.9)
+			
