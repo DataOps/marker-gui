@@ -13,4 +13,5 @@ dcsan:reactive-ace
 iron:router
 meteorhacks:fast-render
 wilddeer:stylus-autoprefixer
+lookback:tooltips
 newswim:particles
