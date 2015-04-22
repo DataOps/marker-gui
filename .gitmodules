@@ -1,0 +1,3 @@
+[submodule "packages/gopatrik:marker/marker-graphs"]
+	path = packages/gopatrik:marker/marker-graphs
+	url = git@github.com:DataOps/marker-graphs.git

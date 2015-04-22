@@ -1,3 +1,24 @@
+Template.paper.rendered = function () {
+
+
+	var paper = d3.select('svg.paper');
+
+	var atoms = Molecule.getAtoms();
+
+	var scatter = atoms['ScatterPlot'];
+	scatter = scatter();
+
+	scatter.init([
+		{label:"value1", "x":30, "y":40},
+		{label:"value2", "x":50, "y":10},
+		{label:"value3", "x":10, "y":140},
+		{label:"value4", "x":80, "y":80}
+	]);
+
+	scatter.draw(paper);
+
+};
+
 Template.index.rendered = function () {
 	  // particlesJS('particles', {
 	  //   particles: {
@@ -89,10 +110,10 @@ Template.index.rendered = function () {
 
 
 Template.sidebar.rendered = function () {
-	// var ace = AceEditor.instance("editor",{
-	//   theme:"github", 
-	//   mode:"html"
-	// });
+	var ace = AceEditor.instance("editor",{
+	  theme:"github", 
+	  mode:"html"
+	});
 };
 
 
