@@ -23,17 +23,81 @@ button
 button:hover
 	background: buttonHoverColor
 	
+
+// input[type=file]
+// 	background modal
+
+input[type=file]
+	position: relative
+	cursor pointer
+	// width 200px
+	// background modal
+
+input[type=file]::-webkit-file-upload-button
+	
+	visibility: hidden
+	// width 100%
+	height 0
+
+input[type=file]::before
+	position: absolute
+	left 0
+	content: 'Upload'
+	display: inline-block;
+	background: linear-gradient(top, modal+#222, modal - #111);
+	border: 1px solid rgba(black,0.3);
+	color white
+	font-weight bold
+	box-shadow inset 0 0 2px 1px rgba(black,0.2)
+	border-radius: 3px
+	padding: 3px 10px
+	white-space: nowrap
+	-webkit-user-select: none
+
+
+
+input[type=file]:hover::before
+	box-shadow inset 0 0 3px 1px rgba(black,0.4)
+
+// input[type=file]:active::before
+// 	background: -webkit-linear-gradient(top, #e3e3e3, #f9f9f9);
+
+
+
 .flex-grid
 	display flex
 	flex-flow row wrap
 	justify-content center
 	
 	.item
-		margin-left 5px
-		height 100px
-		width 200px
-		background rgba(black,0.2)
-		flex 1 0 auto
+		// margin-left 5px
+		height 200px
+		// width 400px
+		flex 1 0 25%
+		&:nth-child(1)
+			height 300px
+			flex 1 0 100%
+			
+		// &:nth-child(5n + 1)
+		// 	background rgba(black,0.2)
+		// &:nth-child(5n + 2)
+		// 	background rgba(black,0.25)
+		// &:nth-child(5n + 3)
+		// 	background rgba(black,0.3)
+		// &:nth-child(5n + 4)
+		// 	background rgba(black,0.35)
+		// &:nth-child(5n + 5)
+		// 	background rgba(black,0.4)
+		&:nth-child(5n + 1)
+			background #3498DB
+		&:nth-child(5n + 2)
+			background #59ABE3
+		&:nth-child(5n + 3)
+			background #6BB9F0
+		&:nth-child(5n + 4)
+			background #1E8BC3
+		&:nth-child(5n + 5)
+			background #52B3D9
 	
 		
 // // tmp

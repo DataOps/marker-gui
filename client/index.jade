@@ -57,27 +57,34 @@ template(name="aboutView")
 				h1 Team
 				ul.inline-list.center
 					li
-						.portrait-frame
+						.portrait-frame(style="background-image:url('/img/team/oscar.png');")
 						span Oscar Nilsson
 					li
-						.portrait-frame
+						.portrait-frame(style="background-image:url('/img/team/david.png');")
 						span David Nääs
 					li
-						.portrait-frame
+						.portrait-frame(style="background-image:url('/img/team/patrik.jpg');")
 						span Patrik Göthe
 					li
-						.portrait-frame
+						.portrait-frame(style="background-image:url('/img/team/morhaf.png');")
 						span Morhaf Alaraj
 					li
-						.portrait-frame
+						.portrait-frame(style="background-image:url('/img/team/jimmy.png');")
 						span Jimmy Hedström
 					li
-						.portrait-frame
+						.portrait-frame(style="background-image:url('/img/team/john.png');")
 						span John Hult
 
 
 
 template(name="sidebar")
+	form.middle.small
+		span.middle Upload a .csv, json or a plain text file.
+		br
+		input.mt.medium.middle(type="file")
+
+	p Or just drag a file onto the editor below!
+
 	.sidebar.show-sidebar
 		button.gui.green-btn
 			| Gui
@@ -100,11 +107,16 @@ template(name="createView")
 
 
 template(name="graphspace")
+	h2.center Suggested graph
 	.graph.relative.flex-grid.outline
-		.item
-		.item
-		.item
-		.item
+		.item.relative: .center-center
+			span Most popular graph for the data
+		.item.relative: .center-center
+			span Alternative graph
+		.item.relative: .center-center
+			span Alternative graph
+		.item.relative: .center-center
+			span Alternative graph
 		//- .center-center
 		//- 	p graph view
 
