@@ -61,6 +61,9 @@
 .no-mb
 	margin-bottom 0
 
+.no-mt
+	margin-top 0
+
 .inline
 	display: inline-block
 
@@ -95,6 +98,9 @@
 	
 .right
 	float right
+	
+.bottom
+	bottom 0
 
 .parent-height
 	height 100%
@@ -103,6 +109,11 @@
 	position absolute
 	top 0
 	right 0
+	
+.vertical-align
+	position relative
+	top 50%
+	transform translateY(-50%)
 
 .center-center
 	align(b)
@@ -147,3 +158,24 @@
 
 .relative
 	position relative
+	
+.btn-padding
+	padding 1em
+	
+.hundred
+	height 100px
+	
+.tooltip 
+	z-index 1001
+	background #424242
+	color #e2e2e2
+	pointer-events none
+	transition opacity .1s ease-out
+	opacity 0
+	padding 1em
+	
+	&.hide
+		opacity 0
+
+  	&.show
+		opacity 1

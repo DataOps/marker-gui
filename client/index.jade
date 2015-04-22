@@ -8,6 +8,7 @@ template(name="main")
 	+pageHead
 	main.relative
 		+yield
+	+tooltips
 
 template(name="index")
 	section.relative(style="min-height: 600px;")
@@ -78,22 +79,24 @@ template(name="aboutView")
 
 
 template(name="sidebar")
-	form.middle.small
-		span.middle Upload a .csv, json or a plain text file.
-		br
-		input.mt.medium.middle(type="file")
+	//- form.middle.small
+	//- 	span.middle Upload a .csv, json or a plain text file.
+	//- 	br
+	//- 	input.mt.medium.middle(type="file")
 
-	p Or just drag a file onto the editor below!
+	//- p Or just drag a file onto the editor below!
 
 	.sidebar.show-sidebar
-		button.gui.green-btn
-			| Gui
-		button.text.green-btn
-			| Text
-		button.import.green-btn
-			| Import Data
-		button.shoot.right.purple-btn
-			| Shoot
+		.hundred.relative
+			.btn-container.absolute.bottom
+				button.gui.btn-padding
+					| Gui
+				button.text.btn-padding
+					| Text
+				button(data-tooltip="Or drag a file into the editor." data-tooltip-).import.btn-padding
+					| Import Data
+				button.shoot.right.btn-padding
+					| Shoot
 		#editor
 
 template(name="createView")
@@ -107,7 +110,8 @@ template(name="createView")
 
 
 template(name="graphspace")
-	h2.center Suggested graph
+	.hundred
+		h2.center.no-mb.no-mt.vertical-align Suggested graphs:
 	.graph.relative.flex-grid.outline
 		.item.relative: .center-center
 			span Most popular graph for the data
