@@ -10,7 +10,6 @@ insecure
 mquandalle:jade
 mandrill:ace
 dcsan:reactive-ace
-arch:ace-editor
 iron:router
 meteorhacks:fast-render
 wilddeer:stylus-autoprefixer

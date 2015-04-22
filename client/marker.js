@@ -63,12 +63,6 @@ Template.index.rendered = function () {
 };
 // meteor add newswim:particles
 
-Template.sidebar.rendered = function () {
-	var ace = AceEditor.instance("editor",{
-	  theme:"github", 
-	  mode:"html"
-	});
-};
 
 // Template.sidebar.events({
 //   'click .edit': function () {
@@ -91,3 +85,30 @@ Template.sidebar.rendered = function () {
 //     }
 //   }
 // });
+
+
+
+Template.sidebar.rendered = function () {
+	// var ace = AceEditor.instance("editor",{
+	//   theme:"github", 
+	//   mode:"html"
+	// });
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
