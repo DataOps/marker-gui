@@ -1,3 +1,13 @@
+var editor;
+
+function parse() {
+	var text = editor.getValue();
+//	console.log(text);
+    var parsed = parser.parse(text)
+    var output = JSON.stringify(parsed, null, 4);
+    console.log("parsed output: " + output);	
+}
+
 Template.index.rendered = function () {
 	  particlesJS('particles', {
 	    particles: {
@@ -63,12 +73,45 @@ Template.index.rendered = function () {
 };
 // meteor add newswim:particles
 
-Template.sidebar.rendered = function () {
-	var ace = AceEditor.instance("editor",{
-	  theme:"github", 
-	  mode:"html"
-	});
+Template.sidebar.rendered = function () {	
+	var tempInput = 
+	"#data: 1,2,3,4\n" +
+	"#type: barchart\n" +
+	"#title: My Chart\n" +
+	"#color: red\n";
+
+	Tracker.autorun(function (e) {
+		editor = AceEditor.instance("editor",{
+	  		theme:"github", 
+	  		mode:"latex"
+		});
+
+		if(editor.loaded!==undefined){
+			e.stop();
+			editor.insert(tempInput);
+
+			// Add short-keys to compile graph
+	        editor.commands.addCommand({
+	            name: 'parseCommand',
+	            bindKey: {
+	                win: 'Ctrl-Enter',
+	                mac: 'Command-Enter'
+	            },
+	            exec: function(editor) {
+	                //console.log("ENTER PRESSED");
+	                parse();
+	            },
+	            readOnly: true // false if this command should not apply in readOnly mode
+	        });			
+		}		
+	});	
 };
+
+Template.sidebar.events({
+	'click .shoot': function() {
+		parse();
+	}
+})
 
 // Template.sidebar.events({
 //   'click .edit': function () {
