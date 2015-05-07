@@ -1,7 +1,7 @@
-var editor;
+var aceEditor;
 
 function parse() {
-	var text = editor.getValue();
+	var text = aceEditor.getValue();
 //	console.log(text);
     var parsed = parser.parse(text)
     var output = JSON.stringify(parsed, null, 4);
@@ -73,38 +73,46 @@ Template.index.rendered = function () {
 };
 // meteor add newswim:particles
 
-Template.sidebar.rendered = function () {	
-	var tempInput = 
-	"#data: 1,2,3,4\n" +
-	"#type: barchart\n" +
-	"#title: My Chart\n" +
-	"#color: red\n";
+Template.sidebar.rendered = function () {
+	var tmpTxt =
+	"-- My chart by Lorem Ipsum\n"+
+	"#data: 1,2,3,4,5,6,7,8,9,10,20,25,30,40,50\n"+
+	"#type: barchart\n"+
+	"#color: red\n"+
+	"@lowest:\n"+
+	"\tlabel: lowest\n"+
+	"#title: My Chart";
 
-	Tracker.autorun(function (e) {
-		editor = AceEditor.instance("editor",{
-	  		theme:"github", 
-	  		mode:"latex"
-		});
+	var langTools = ace.require("ace/ext/language_tools");
+	aceEditor = ace.edit("editor");
+	aceEditor.setOptions({
+		enableBasicAutocompletion: true
+	});
+	aceEditor.setTheme("ace/theme/clouds");
+	aceEditor.getSession().setMode("ace/mode/marker");
+	aceEditor.insert(tmpTxt);
 
-		if(editor.loaded!==undefined){
-			e.stop();
-			editor.insert(tempInput);
+	// Does not work? Morre???
+	var codeSuggestion = {
+		getCompletions: function(editor, session, pos, prefix, callback) {
+			if (prefix.length === 0) {
+				callback(null, []);
+				return
+			} else {
+				$.getJSON("chartTypes.json", function(wordList) {
+					callback(null, wordList.map(function(ea) {
+						return {
+							name: ea.name,
+							value: ea.name,
+							meta: "chartType"
+						}
+					}));
+				})
+			}
+		}
+	}
 
-			// Add short-keys to compile graph
-	        editor.commands.addCommand({
-	            name: 'parseCommand',
-	            bindKey: {
-	                win: 'Ctrl-Enter',
-	                mac: 'Command-Enter'
-	            },
-	            exec: function(editor) {
-	                //console.log("ENTER PRESSED");
-	                parse();
-	            },
-	            readOnly: true // false if this command should not apply in readOnly mode
-	        });			
-		}		
-	});	
+	langTools.addCompleter(codeSuggestion);
 };
 
 Template.sidebar.events({
