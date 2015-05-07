@@ -28,7 +28,7 @@ var MarkerHighlightRules = function() {
             regex : "\\@[a-zA-Z]+"
         }, {
             token : "string",           // " string
-            regex : "([a-zA-Z]+.csv)"
+            regex : "([a-zA-Z]+.(csv|.json)+)"
         }, {
             token : "constant.language.boolean",
             regex : "([0-9]+)"

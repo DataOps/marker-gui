@@ -8,7 +8,6 @@ meteor-platform
 autopublish
 insecure
 mquandalle:jade
-arch:ace-editor
 iron:router
 meteorhacks:fast-render
 wilddeer:stylus-autoprefixer

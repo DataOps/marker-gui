@@ -86,10 +86,27 @@ Template.sidebar.rendered = function () {
 	var langTools = ace.require("ace/ext/language_tools");
 	aceEditor = ace.edit("editor");
 	aceEditor.setOptions({
-		enableBasicAutocompletion: true
+		enableBasicAutocompletion: true,
+		enableLiveAutocompletion: true
 	});
 	aceEditor.setTheme("ace/theme/clouds");
 	aceEditor.getSession().setMode("ace/mode/marker");
+
+	aceEditor.$blockScrolling = Infinity; // Remove warn text in console
+
+	aceEditor.commands.addCommand({
+		name: 'myCommand',
+		bindKey: {
+			win: 'Ctrl-Enter',
+			mac: 'Command-Enter'
+		},
+		exec: function(editor) {
+			//console.log("ENTER PRESSED");
+			parse();
+		},
+		readOnly: true // false if this command should not apply in readOnly mode
+	});
+
 	aceEditor.insert(tmpTxt);
 
 	// Does not work? Morre???
@@ -99,7 +116,7 @@ Template.sidebar.rendered = function () {
 				callback(null, []);
 				return
 			} else {
-				$.getJSON("chartTypes.json", function(wordList) {
+				$.getJSON("/scripts/chartTypes.json", function(wordList) {
 					callback(null, wordList.map(function(ea) {
 						return {
 							name: ea.name,
