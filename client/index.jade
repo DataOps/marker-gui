@@ -103,12 +103,13 @@ template(name="sidebar")
 					| Text
 				button(data-tooltip="Or drag a file into the editor." data-tooltip-).import.btn-padding
 					| Import Data
+				button.download.right.btn-padding
+					| Download Graph					
 				button.shoot.right.btn-padding
-					| Shoot
+					| Shoot					
 		#editor
 
 template(name="createView")
-	
 	section.mt2.main-width
 		.whole
 			.half.parent-height
@@ -121,8 +122,7 @@ template(name="graphspace")
 	.hundred
 		h2.center.no-mb.no-mt.vertical-align Suggested graphs:
 	.graph.relative.flex-grid.outline
-		.item.relative: .center-center
-			span Most popular graph for the data
+		+bigGraph
 		.item.relative: .center-center
 			span Alternative graph
 		.item.relative: .center-center
@@ -132,6 +132,6 @@ template(name="graphspace")
 		//- .center-center
 		//- 	p graph view
 
-
-
-
+template(name="bigGraph")
+	.item.relative: .center-center
+		span Most popular graph for the data

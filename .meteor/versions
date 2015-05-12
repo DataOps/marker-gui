@@ -49,6 +49,7 @@ mongo@1.0.11
 mquandalle:jade@0.4.1
 newswim:particles@1.1.0
 observe-sequence@1.0.4
+ongoworks:pdf@1.1.1
 ordered-dict@1.0.2
 random@1.0.2
 reactive-dict@1.0.5

@@ -109,7 +109,6 @@ Template.sidebar.rendered = function () {
 
 	aceEditor.insert(tmpTxt);
 
-	// Does not work? Morre???
 	var codeSuggestion = {
 		getCompletions: function(editor, session, pos, prefix, callback) {
 			if (prefix.length === 0) {
@@ -135,8 +134,17 @@ Template.sidebar.rendered = function () {
 Template.sidebar.events({
 	'click .shoot': function() {
 		parse();
-	}
-})
+	},
+
+	'click .download': function() {
+		Blaze.saveAsPDF(Template.bigGraph, {
+			filename: "graph.pdf", // optional, default is "document.pdf"
+			orientation: "landscape", // optional, "landscape" or "portrait" (default)
+			unit: "cm", // optional, unit for coordinates, one of "pt", "mm" (default), "cm", or "in"
+			format: "a4" // optional, see Page Formats, default is "a4"
+		});
+	}	
+});
 
 // Template.sidebar.events({
 //   'click .edit': function () {
