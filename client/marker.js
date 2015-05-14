@@ -10,23 +10,45 @@ function parse() {
 }
 
 Template.paper.rendered = function () {
-
-
-	var paper = d3.select('svg.paper');
+	var paper = d3.select('svg.paper')
+		.attr('height', 400)
+		.attr('width', 550)
 
 	var atoms = Molecule.getAtoms();
 
-	var scatter = atoms['ScatterPlot'];
-	scatter = scatter();
+	// var sp = atoms['ScatterPlot'];
+	// sp = sp()
 
-	scatter.init([
-		{label:"value1", "x":30, "y":40},
-		{label:"value2", "x":50, "y":10},
-		{label:"value3", "x":10, "y":140},
-		{label:"value4", "x":80, "y":80}
-	]);
+	// sp.init([
+	// 	{label:"value1", "x":30, "y":40},
+	// 	{label:"value2", "x":50, "y":10},
+	// 	{label:"value3", "x":10, "y":140},
+	// 	{label:"value3", "x":10, "y":120},
+	// 	{label:"value3", "x":50, "y":130},
+	// 	{label:"value3", "x":70, "y":140},
+	// 	{label:"value3", "x":60, "y":140},
+	// 	{label:"value3", "x":20, "y":170},
+	// 	{label:"value3", "x":13, "y":130},
+	// 	{label:"value4", "x":80, "y":80}
+	// ]);
 
-	scatter.draw(paper);
+	// sp.draw(paper);
+
+	var bc = atoms['BarChart'];
+	bc = bc();
+
+	bc.init([
+		{label:"BallaKjelli", "value":150},
+		{label:"Bengt", "value":10},
+		{label:"Jimmy", "value":30},
+		{label:"Morhaf", "value":40},
+		{label:"John", "value":30},
+		{label:"Patrik", "value":150},
+		{label:"Oscar", "value":100},
+		{label:"David", "value":80}
+	],{title:"Who rules tha most?"});
+
+	bc.draw(paper);
 
 };
 

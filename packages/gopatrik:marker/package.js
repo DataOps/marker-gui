@@ -15,8 +15,19 @@ Package.onUse(function(api) {
   api.addFiles('gopatrik:marker.js');
 
   api.addFiles('marker-graphs/src/app.js', 'client');
+  // api.addFiles('marker-graphs/src/atoms/scatter-plot/atom.js', 'client');
+  // api.addFiles('marker-graphs/src/atoms/pie-chart/atom.js', 'client');
+  // api.addFiles('marker-graphs/src/atoms/bar-chart/atom.js', 'client');
+
+
   api.addFiles('marker-graphs/src/atoms/scatter-plot/atom.js', 'client');
+  api.addFiles('marker-graphs/src/atoms/scatter-plot-3d/atom.js', 'client');
   api.addFiles('marker-graphs/src/atoms/pie-chart/atom.js', 'client');
+  api.addFiles('marker-graphs/src/atoms/line-chart/atom.js', 'client');
+  api.addFiles('marker-graphs/src/atoms/area-chart/atom.js', 'client');
+  api.addFiles('marker-graphs/src/atoms/chord-chart/atom.js', 'client');
+  api.addFiles('marker-graphs/src/atoms/3d-pie-chart/atom.js', 'client');
+  api.addFiles('marker-graphs/src/atoms/world/atom.js', 'client');
   api.addFiles('marker-graphs/src/atoms/bar-chart/atom.js', 'client');
 
   api.export('Molecule', 'client');
