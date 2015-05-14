@@ -15,20 +15,21 @@ template(name="main")
 	+tooltips
 
 template(name="index")
-	section#particles.relative(style="min-height: 600px;")
+	
+	section#particles.relative.bg(style="min-height: 600px; background-image:url('/img/bg/splash-01.svg');")
 		.center-center
 			h1.center.spaced Here be screenshots
-			p.center Marker is a new way to deliver graphs
+			p.center Meet Marker. It's Robin Hood of data technology
 
 	section.splash-section.relative.accent-bg(style="min-height: 600px;")
 		.bg.texture.full(style="background-image:url('/textures/oranges_white.png'); opacity:0.1;")
 		.center-center
 			h1.center.spaced
-				| Because
-				span.bold.uppercase you
+				| When
+				span.bold.uppercase Life
 				br 
-				| are worth it
-			p.center Marker is a new way to deliver graphs
+				| Gives You Lemons
+			p.center You make lemonade
 
 	section
 		h1.center Try it for yourself!
@@ -44,7 +45,7 @@ template(name="pageHead")
 				+pageNav
 
 template(name="pageNav")
-	nav
+	nav.page-nav
 		ul.inline-list.no-style-type.nav-list
 			li: a.foreground(href="/") Home
 			li: a.foreground(href="/create") Create
@@ -118,7 +119,11 @@ template(name="createView")
 				+graphspace
 
 
+template(name="paper")
+	svg.paper(style="min-height:500px; max-width:100%;")
+
 template(name="graphspace")
+	+paper
 	.hundred
 		h2.center.no-mb.no-mt.vertical-align Suggested graphs:
 	.graph.relative.flex-grid.outline
