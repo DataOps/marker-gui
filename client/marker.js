@@ -112,7 +112,7 @@ Template.index.rendered = function () {
 Template.sidebar.rendered = function () {
 	var ace = AceEditor.instance("editor",{
 	  theme:"github", 
-	  mode:"html"
+	  mode:"marker"
 	});
 };
 
