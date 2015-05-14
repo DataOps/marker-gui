@@ -92,7 +92,7 @@ var currentType;
 function drawGraph (type, data) {
 	var paper = d3.select('svg.paper')
 		.attr('height', 400)
-		.attr('width', 550)
+		.attr('width', Math.min($(document).width(),1200))
 
 
 	// clear if other type

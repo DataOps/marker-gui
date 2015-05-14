@@ -96,7 +96,7 @@ template(name="sidebar")
 	//- p Or just drag a file onto the editor below!
 
 	.sidebar.show-sidebar
-		.hundred.relative
+		.relative.mt2
 			.btn-container.absolute.bottom
 				button.gui.btn-padding
 					| Gui
@@ -113,14 +113,16 @@ template(name="sidebar")
 template(name="createView")
 	section.mt2.main-width
 		.whole
-			.half.parent-height
-				+sidebar
-			.half.parent-height
-				+graphspace
+			//- .half.parent-height
+			//- .half.parent-height
+			//- +graphspace
+			div
+				+paper
+			+sidebar
 
 
 template(name="paper")
-	svg.paper(style="min-height:500px; max-width:100%;")
+	svg.paper(style="max-width:100%;")
 
 template(name="graphspace")
 	+paper
