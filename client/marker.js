@@ -1,26 +1,49 @@
 
 var aceEditor;
 
+
+function formatParsedData (parsed) {
+	var data = {};
+	for (var i = 0; i < parsed.length; i++) {
+		data[parsed[i].type] = parsed[i].value;
+		// delete data[parsed[i].type].type;
+	};
+
+	// console.log(data)
+
+	return data;
+}
+
 function parse() {
 	var text = aceEditor.getValue();
     var parsed = parser.parse(text)
-    var output = JSON.stringify(parsed, null, 4);
+    // var out = JSON.stringify(parsed, null, 4);
+    // console.log(out)
+
+
+
+    var output = formatParsedData(parsed);
 
     var data = [];
-
     var cycleSize = 2;
-    for (var i = 0; i < parsed[1].value.length; i=i+cycleSize) {
+    for (var i = 0; i < output.data.length; i=i+cycleSize) {
     	data.push({
-    		label: parsed[1].value[i].value,
-    		value: parsed[1].value[i+1].value
+    		label: output.data[i].value,
+    		value: output.data[i+1].value
     	})
     };
 
-    var type = parsed[2].value;
+    var type = output.type;
 
-    drawGraph(type, data);
 
-}
+   // Deep copy for options
+   var options = $.extend(true, {}, output);
+   delete options.data;
+
+
+   drawGraph(type, data, options);
+};
+
 // [Log] parsed output: [ (marker.js, line 10)
 //     {
 //         "type": "comment",
@@ -89,7 +112,7 @@ function parse() {
 
 
 var currentType;
-function drawGraph (type, data) {
+function drawGraph (type, data, options) {
 	var paper = d3.select('svg.paper')
 		.attr('height', 400)
 		.attr('width', Math.min($(document).width(),1200))
@@ -106,7 +129,7 @@ function drawGraph (type, data) {
 	var bc = atoms[type];
 	bc = bc();
 
-	bc.init(data,{title:"Who rules tha most?"});
+	bc.init(data,options);
 
 	bc.draw(paper);
 
@@ -202,15 +225,15 @@ Template.sidebar.rendered = function () {
 
 	var tmpTxt =
 	"-- My chart by Lorem Ipsum\n"+
-	"#data: Patrik,52\n"+
-		"\tJimmy, 32\n"+
-		"\tMorhag, 62\n"+
-		"\tJohn, 12\n"+
-	"#type: BarChart\n"+
-	"#color: red\n"+
-	"@lowest:\n"+
-	"\tlabel: lowest\n"+
-	"#title: My Chart";
+	"#data Patrik 52\n"+
+		"\tJimmy 32\n"+
+		"\tMorhag 62\n"+
+		"\tJohn 12\n"+
+	"#type BarChart\n"+
+	"#color red\n"+
+	"@lowest\n"+
+	"\tlabel lowest\n"+
+	"#title My Chart";
 
 	var langTools = ace.require("ace/ext/language_tools");
 	aceEditor = ace.edit("editor");
