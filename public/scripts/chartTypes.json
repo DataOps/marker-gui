@@ -1,0 +1,13 @@
+[
+    {
+        "value": "#type",
+        "name": "BarChart"
+    },
+    {
+        "value": "#type",
+        "name": "PieChart"
+    },
+    {
+        "value": "#type",
+        "name": "ScatterPlot"
+    }]

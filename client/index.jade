@@ -1,24 +1,137 @@
 head
 	meta(name='viewport', content='width=device-width, initial-scale=1.0', charset="UTF-8")
+	script(src="/scripts/ace.js" type="text/javascript" charset="utf-8")
+	script(src="/scripts/ext-language_tools.js" type="text/javascript" charset="utf-8")
+	script(src="/scripts/peg-0.8.0.min.js" type="text/javascript" charset="utf-8")
+	script(src="/scripts/parser.js" type="text/javascript" charset="utf-8")
 	title Marker
 body
-	.main
-	+sidebar
-	+graphspace
+
+//- layout template
+template(name="main")
+	+pageHead
+	main.relative
+		+yield
+	+tooltips
+
+template(name="index")
+	section#particles.relative(style="min-height: 600px;")
+		.center-center
+			h1.center.spaced Here be screenshots
+			p.center Marker is a new way to deliver graphs
+
+	section.splash-section.relative.accent-bg(style="min-height: 600px;")
+		.bg.texture.full(style="background-image:url('/textures/oranges_white.png'); opacity:0.1;")
+		.center-center
+			h1.center.spaced
+				| Because
+				span.bold.uppercase you
+				br 
+				| are worth it
+			p.center Marker is a new way to deliver graphs
+
+	section
+		h1.center Try it for yourself!
+
+	section(style="height: 600px;")
+		+createView
+
+template(name="pageHead")
+	header.page-head
+		.left
+			img.mt.inline.middle.logo(src="/img/marker-logo-1.png")
+			.inline.middle
+				+pageNav
+
+template(name="pageNav")
+	nav
+		ul.inline-list.no-style-type.nav-list
+			li: a.foreground(href="/") Home
+			li: a.foreground(href="/create") Create
+			li: a.foreground(href="/about") About
+
+template(name="aboutView")
+	.mid-width
+		h1 About
+
+		section
+			p Data  science and Big  data  are  expressions  that  have  become  popularised during the last couple of years.  Since entering the connected information age, our society have grown more and more dependant on analysing data and processing information for continuous improvement, from an ever increasing amount of data collected both from internet connected sensors and tracking of our behaviour using digital devices. In many business ventures, using these methods of tracking data have become essential to stay competitive and relevant.  
+
+			p Organisations invest an increasing amount of resources trying to extract every possible statistic about customers, users and employees in order to gain a competitive advantage. On the internet, every possible action of a website that might be of interest is tracked, and most people see prompts daily that encourage us to take part in customer evaluations. All this data is then put to use, but with a plethora of different data sources, it is often hard to find the most relevant way to combine, visualise, and find the  permutation  of  gathered  values  that  ultimately gains you insight into what you were missing. An algorithm could utilise the raw data but it  lacks  meaning  for  the  human  mind  until  it  is  structured  and  presented visually. 
+
+			//- p However, not only businesses benefit from the use of data analysis. Journalists, bloggers, organisations and individuals also have access to data that they would like to use to their advantage, since the most powerful way to make a point, often is to back it up with comprehensible data and statistics. In order for this to be possible, more intuitive and "hands on" ways to handle and visualise data is required. Programs like Microsoft Excel excel at many tasks, but often require expert knowledge of every possible action to be made. It is often hard to find compatible ways to integrate data sources into  the  program, especially when data is dynamic and streamed live from the web.
+
+		section
+			header
+				h1 Team
+				ul.inline-list.center
+					li
+						.portrait-frame(style="background-image:url('/img/team/oscar.png');")
+						span Oscar Nilsson
+					li
+						.portrait-frame(style="background-image:url('/img/team/david.png');")
+						span David Nääs
+					li
+						.portrait-frame(style="background-image:url('/img/team/patrik.jpg');")
+						span Patrik Göthe
+					li
+						.portrait-frame(style="background-image:url('/img/team/morhaf.png');")
+						span Morhaf Alaraj
+					li
+						.portrait-frame(style="background-image:url('/img/team/jimmy.png');")
+						span Jimmy Hedström
+					li
+						.portrait-frame(style="background-image:url('/img/team/john.png');")
+						span John Hult
+
+
 
 template(name="sidebar")
+	//- form.middle.small
+	//- 	span.middle Upload a .csv, json or a plain text file.
+	//- 	br
+	//- 	input.mt.medium.middle(type="file")
+
+	//- p Or just drag a file onto the editor below!
+
 	.sidebar.show-sidebar
-		button.edit
-			| EDIT
+		.hundred.relative
+			.btn-container.absolute.bottom
+				button.gui.btn-padding
+					| Gui
+				button.text.btn-padding
+					| Text
+				button(data-tooltip="Or drag a file into the editor." data-tooltip-).import.btn-padding
+					| Import Data
+				button.download.right.btn-padding
+					| Download Graph					
+				button.shoot.right.btn-padding
+					| Shoot					
 		#editor
-		button.gui.top-btn
-			| GUI
-		button.text.top-btn.top-btn-active
-			| TEXT
-		button.import.bot-btn
-			| IMPORT DATA
-		button.shoot.bot-btn
-			| SHOOT
+
+template(name="createView")
+	section.mt2.main-width
+		.whole
+			.half.parent-height
+				+sidebar
+			.half.parent-height
+				+graphspace
+
 
 template(name="graphspace")
-	.graph
+	.hundred
+		h2.center.no-mb.no-mt.vertical-align Suggested graphs:
+	.graph.relative.flex-grid.outline
+		+bigGraph
+		.item.relative: .center-center
+			span Alternative graph
+		.item.relative: .center-center
+			span Alternative graph
+		.item.relative: .center-center
+			span Alternative graph
+		//- .center-center
+		//- 	p graph view
+
+template(name="bigGraph")
+	.item.relative: .center-center
+		span Most popular graph for the data
