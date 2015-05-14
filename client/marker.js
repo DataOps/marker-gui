@@ -3,41 +3,118 @@ var aceEditor;
 
 function parse() {
 	var text = aceEditor.getValue();
-//	console.log(text);
     var parsed = parser.parse(text)
     var output = JSON.stringify(parsed, null, 4);
-    console.log("parsed output: " + output);	
-}
 
-Template.paper.rendered = function () {
+    var data = [];
+
+    var cycleSize = 2;
+    for (var i = 0; i < parsed[1].value.length; i=i+cycleSize) {
+    	data.push({
+    		label: parsed[1].value[i].value,
+    		value: parsed[1].value[i+1].value
+    	})
+    };
+
+    var type = parsed[2].value;
+
+    drawGraph(type, data);
+
+}
+// [Log] parsed output: [ (marker.js, line 10)
+//     {
+//         "type": "comment",
+//         "value": null
+//     },
+//     {
+//         "type": "data",
+//         "value": [
+//             {
+//                 "type": "string",
+//                 "value": "Patrik"
+//             },
+//             {
+//                 "type": "int",
+//                 "value": 52
+//             },
+//             {
+//                 "type": "string",
+//                 "value": "Jimmy"
+//             },
+//             {
+//                 "type": "int",
+//                 "value": 32
+//             },
+//             {
+//                 "type": "string",
+//                 "value": "Morhag"
+//             },
+//             {
+//                 "type": "int",
+//                 "value": 62
+//             },
+//             {
+//                 "type": "string",
+//                 "value": "John"
+//             },
+//             {
+//                 "type": "int",
+//                 "value": 12
+//             }
+//         ]
+//     },
+//     {
+//         "type": "type",
+//         "value": "barchart"
+//     },
+//     {
+//         "type": "color",
+//         "value": "red"
+//     },
+//     {
+//         "type": "lowest",
+//         "value": [
+//             {
+//                 "type": "string",
+//                 "value": "label"
+//             }
+//         ]
+//     },
+//     "lowest",
+//     {
+//         "type": "title",
+//         "value": "My Chart"
+//     }
+// ]
+
+
+var currentType;
+function drawGraph (type, data) {
 	var paper = d3.select('svg.paper')
 		.attr('height', 400)
 		.attr('width', 550)
 
+
+	// clear if other type
+	if(type != currentType && currentType){
+		paper.selectAll('*').remove();
+	}
+
+
 	var atoms = Molecule.getAtoms();
 
-	// var sp = atoms['ScatterPlot'];
-	// sp = sp()
-
-	// sp.init([
-	// 	{label:"value1", "x":30, "y":40},
-	// 	{label:"value2", "x":50, "y":10},
-	// 	{label:"value3", "x":10, "y":140},
-	// 	{label:"value3", "x":10, "y":120},
-	// 	{label:"value3", "x":50, "y":130},
-	// 	{label:"value3", "x":70, "y":140},
-	// 	{label:"value3", "x":60, "y":140},
-	// 	{label:"value3", "x":20, "y":170},
-	// 	{label:"value3", "x":13, "y":130},
-	// 	{label:"value4", "x":80, "y":80}
-	// ]);
-
-	// sp.draw(paper);
-
-	var bc = atoms['BarChart'];
+	var bc = atoms[type];
 	bc = bc();
 
-	bc.init([
+	bc.init(data,{title:"Who rules tha most?"});
+
+	bc.draw(paper);
+
+	currentType = type;
+}
+
+Template.paper.rendered = function () {
+	drawGraph('BarChart',[
 		{label:"BallaKjelli", "value":150},
 		{label:"Bengt", "value":10},
 		{label:"Jimmy", "value":30},
@@ -46,10 +123,7 @@ Template.paper.rendered = function () {
 		{label:"Patrik", "value":150},
 		{label:"Oscar", "value":100},
 		{label:"David", "value":80}
-	],{title:"Who rules tha most?"});
-
-	bc.draw(paper);
-
+	]);
 };
 
 
@@ -119,11 +193,20 @@ Template.index.rendered = function () {
 // meteor add newswim:particles
 
 
+
+
 Template.sidebar.rendered = function () {
+
+	// "#data: 1,2,3,4,5,6,7,8,9,10,20,25,30,40,50\n"+
+
+
 	var tmpTxt =
 	"-- My chart by Lorem Ipsum\n"+
-	"#data: 1,2,3,4,5,6,7,8,9,10,20,25,30,40,50\n"+
-	"#type: barchart\n"+
+	"#data: Patrik,52\n"+
+		"\tJimmy, 32\n"+
+		"\tMorhag, 62\n"+
+		"\tJohn, 12\n"+
+	"#type: BarChart\n"+
 	"#color: red\n"+
 	"@lowest:\n"+
 	"\tlabel: lowest\n"+
