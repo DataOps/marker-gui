@@ -121,8 +121,7 @@ function drawGraph (type, data, options) {
 	// clear if other type
 	if(type != currentType && currentType){
 		paper.selectAll('*').remove();
-	}
-
+	};
 
 	var atoms = Molecule.getAtoms();
 
@@ -134,19 +133,6 @@ function drawGraph (type, data, options) {
 	bc.draw(paper);
 
 	currentType = type;
-}
-
-Template.paper.rendered = function () {
-	drawGraph('BarChart',[
-		{label:"BallaKjelli", "value":150},
-		{label:"Bengt", "value":10},
-		{label:"Jimmy", "value":30},
-		{label:"Morhaf", "value":40},
-		{label:"John", "value":30},
-		{label:"Patrik", "value":150},
-		{label:"Oscar", "value":100},
-		{label:"David", "value":80}
-	]);
 };
 
 
@@ -224,7 +210,7 @@ Template.sidebar.rendered = function () {
 
 
 	var tmpTxt =
-	"-- My chart by Lorem Ipsum\n"+
+	"-- Try overriding the title attribute\n"+
 	"#data Patrik 52\n"+
 		"\tJimmy 32\n"+
 		"\tMorhag 62\n"+
@@ -232,8 +218,7 @@ Template.sidebar.rendered = function () {
 	"#type BarChart\n"+
 	"#color red\n"+
 	"@lowest\n"+
-	"\tlabel lowest\n"+
-	"#title My Chart";
+	"\tlabel lowest\n";
 
 	var langTools = ace.require("ace/ext/language_tools");
 	aceEditor = ace.edit("editor");
@@ -281,6 +266,13 @@ Template.sidebar.rendered = function () {
 	}
 
 	langTools.addCompleter(codeSuggestion);
+
+
+
+
+
+	///init
+	parse();
 };
 
 Template.sidebar.events({
