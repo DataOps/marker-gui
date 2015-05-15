@@ -29,6 +29,7 @@ Package.onUse(function(api) {
   api.addFiles('marker-graphs/src/atoms/3d-pie-chart/atom.js', 'client');
   api.addFiles('marker-graphs/src/atoms/world/atom.js', 'client');
   api.addFiles('marker-graphs/src/atoms/bar-chart/atom.js', 'client');
+//  api.addFiles('marker-graphs/src/atoms/venn-diagram/atom.js', 'client');
 
   api.export('Molecule', 'client');
 });
