@@ -17,98 +17,94 @@ function formatParsedData (parsed) {
 function parse() {
 	var text = aceEditor.getValue();
     var parsed = parser.parse(text)
-    // var out = JSON.stringify(parsed, null, 4);
-    // console.log(out)
-
-
-
-    var output = formatParsedData(parsed);
+    var out = JSON.stringify(parsed, null, 4);
+    console.log(out)
 
     var data = [];
-    var cycleSize = 2;
-    for (var i = 0; i < output.data.length; i=i+cycleSize) {
-    	data.push({
-    		label: output.data[i].value,
-    		value: output.data[i+1].value
-    	})
+    var chartType = "";
+    var title = "";
+    var color = "";
+
+    // console.log(parsed[1].value[0].length);
+
+    for (var i = 0; i < parsed.length; i++) {
+        if (parsed[i].type == "data") {
+        	if (parsed[i].value[0][0] && parsed[i].value[0][0] !== "undefined") {
+        		// 2D array
+        		var dataArray = parsed[i].value;
+        		console.log("dataArray.length: " + dataArray.length);
+
+        		for (var j = 0; j < dataArray.length; j++) {
+        			var temp = [];
+        			console.log(dataArray[j].length);
+
+        			for (var k = 0; k < dataArray[j].length; k++) {
+        				temp[k] = dataArray[j][k].value;
+        			}
+
+	        		// Assume label in data[j][0]. Values in rest.
+	        		if (temp.length > 2) {
+        				data.push({label: temp.shift(), value: temp});
+        			} else {
+        				data.push({label: temp[0], value: temp[1]});
+        			}
+        		}
+        	} else {
+	            for (var j = 0; j < parsed[i].value.length; j++) {
+	                if (parsed[i].value[i].type == "file") {
+	                    data = "";
+	                    data = parsed[i].value[0].value;
+	                    break;
+	                } else if (parsed[i].value[i].type == ("int" || "string" || "double")) {
+	                    data[j] = parsed[i].value[j].value;
+	                }
+	            }
+	        }
+        } else if (parsed[i].type == "type") {
+            // if (supportedCharts.indexOf(parsed[i].value) != -1) {
+                chartType = parsed[i].value;
+            // } else {
+            //     console.log("Unsupported chart type!");
+            // }
+        } else if (parsed[i].type == "title") {
+        	title = parsed[i].value;
+        } else if (parsed[i].type == "color") {
+            color = parsed[i].value;
+        } else {
+            console.log("Unsupported parsing error");
+        }
+    }
+
+    console.log(data);
+
+    var options = 
+    {
+    	title: title
     };
 
-    var type = output.type;
 
 
-   // Deep copy for options
-   var options = $.extend(true, {}, output);
-   delete options.data;
+   //  var output = formatParsedData(parsed);
+
+   //  var data = [];
+   //  var cycleSize = 2;
+   //  for (var i = 0; i < output.data.length; i=i+cycleSize) {
+   //  	data.push({
+   //  		label: output.data[i].value,
+   //  		value: output.data[i+1].value
+   //  	})
+   //  };
+
+   //  var type = output.type;
 
 
-   drawGraph(type, data, options);
+   // // Deep copy for options
+   //var options = $.extend(true, {}, output);
+   //delete options.data;
+
+   drawGraph(chartType, data, options);
 };
 
-// [Log] parsed output: [ (marker.js, line 10)
-//     {
-//         "type": "comment",
-//         "value": null
-//     },
-//     {
-//         "type": "data",
-//         "value": [
-//             {
-//                 "type": "string",
-//                 "value": "Patrik"
-//             },
-//             {
-//                 "type": "int",
-//                 "value": 52
-//             },
-//             {
-//                 "type": "string",
-//                 "value": "Jimmy"
-//             },
-//             {
-//                 "type": "int",
-//                 "value": 32
-//             },
-//             {
-//                 "type": "string",
-//                 "value": "Morhag"
-//             },
-//             {
-//                 "type": "int",
-//                 "value": 62
-//             },
-//             {
-//                 "type": "string",
-//                 "value": "John"
-//             },
-//             {
-//                 "type": "int",
-//                 "value": 12
-//             }
-//         ]
-//     },
-//     {
-//         "type": "type",
-//         "value": "barchart"
-//     },
-//     {
-//         "type": "color",
-//         "value": "red"
-//     },
-//     {
-//         "type": "lowest",
-//         "value": [
-//             {
-//                 "type": "string",
-//                 "value": "label"
-//             }
-//         ]
-//     },
-//     "lowest",
-//     {
-//         "type": "title",
-//         "value": "My Chart"
-//     }
-// ]
 
 
 var currentType;
@@ -210,15 +206,22 @@ Template.sidebar.rendered = function () {
 
 
 	var tmpTxt =
-	"-- Try overriding the title attribute\n"+
-	"#data Patrik 52\n"+
-		"\tJimmy 32\n"+
-		"\tMorhag 62\n"+
-		"\tJohn 12\n"+
-	"#type BarChart\n"+
-	"#color red\n"+
-	"@lowest\n"+
-	"\tlabel lowest\n";
+	"-- My Venn diagram\n"+
+	"#data\n"+ 
+		"\t'Set A', 1, 2, 3\n"+
+		"\t'Set B', 1, 4, 5\n"+
+		"\t'Set C', 1, 6, 7\n"+
+	"#type VennDiagram\n"+
+	"#title My Venn diagram";
+
+	// var tmpTxt =
+	// "-- My Venn diagram\n"+
+	// "#data\n"+ 
+	// 	"\t'Set A', 10\n"+
+	// 	"\t'Set B', 15\n"+
+	// 	"\t'Set C', 20\n"+
+	// "#type BarChart\n"+
+	// "#title My Venn diagram";	
 
 	var langTools = ace.require("ace/ext/language_tools");
 	aceEditor = ace.edit("editor");
