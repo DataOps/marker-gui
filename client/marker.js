@@ -1,55 +1,41 @@
 
 var aceEditor;
 
-
-function formatParsedData (parsed) {
-	var data = {};
-	for (var i = 0; i < parsed.length; i++) {
-		data[parsed[i].type] = parsed[i].value;
-		// delete data[parsed[i].type].type;
-	};
-
-	// console.log(data)
-
-	return data;
-}
-
 function parse() {
 	var text = aceEditor.getValue();
     var parsed = parser.parse(text)
-    var out = JSON.stringify(parsed, null, 4);
-    console.log(out)
+    //var out = JSON.stringify(parsed, null, 4);
+    //console.log(out)
 
     var data = [];
     var chartType = "";
-    var title = "";
-    var color = "";
-
-    // console.log(parsed[1].value[0].length);
 
     for (var i = 0; i < parsed.length; i++) {
         if (parsed[i].type == "data") {
         	if (parsed[i].value[0][0] && parsed[i].value[0][0] !== "undefined") {
-        		// 2D array
+        		// 2D array, we need to go deeper into the tree structure
         		var dataArray = parsed[i].value;
-        		console.log("dataArray.length: " + dataArray.length);
 
+        		// Loop over all elements/arrays in data array
         		for (var j = 0; j < dataArray.length; j++) {
         			var temp = [];
-        			console.log(dataArray[j].length);
 
+        			// Insert every data value into temporary array
         			for (var k = 0; k < dataArray[j].length; k++) {
         				temp[k] = dataArray[j][k].value;
         			}
 
 	        		// Assume label in data[j][0]. Values in rest.
 	        		if (temp.length > 2) {
+	        			// Insert temp array into data array. Remove first element and add the rest
         				data.push({label: temp.shift(), value: temp});
         			} else {
+        				// Do not create new array, just return the values from temp array
         				data.push({label: temp[0], value: temp[1]});
         			}
         		}
         	} else {
+        		// Just get the values straight out of AST tree and insert into data
 	            for (var j = 0; j < parsed[i].value.length; j++) {
 	                if (parsed[i].value[i].type == "file") {
 	                    data = "";
@@ -61,48 +47,23 @@ function parse() {
 	            }
 	        }
         } else if (parsed[i].type == "type") {
-            // if (supportedCharts.indexOf(parsed[i].value) != -1) {
-                chartType = parsed[i].value;
-            // } else {
-            //     console.log("Unsupported chart type!");
-            // }
-        } else if (parsed[i].type == "title") {
-        	title = parsed[i].value;
-        } else if (parsed[i].type == "color") {
-            color = parsed[i].value;
-        } else {
-            console.log("Unsupported parsing error");
+        	// Chech what chart type we want to draw
+            chartType = parsed[i].value;
         }
     }
 
-    console.log(data);
+    //console.log(data);
 
-    var options = 
-    {
-    	title: title
-    };
+    var options = {};
 
+    // Collect all options as title, color, label etc and insert to options array
+	for (var i = 0; i < parsed.length; i++) {
+		options[parsed[i].type] = parsed[i].value;
+	};
+	delete options.data;
 
-
-   //  var output = formatParsedData(parsed);
-
-   //  var data = [];
-   //  var cycleSize = 2;
-   //  for (var i = 0; i < output.data.length; i=i+cycleSize) {
-   //  	data.push({
-   //  		label: output.data[i].value,
-   //  		value: output.data[i+1].value
-   //  	})
-   //  };
-
-   //  var type = output.type;
-
-
-   // // Deep copy for options
-   //var options = $.extend(true, {}, output);
-   //delete options.data;
-
-   drawGraph(chartType, data, options);
+	// Draw the graph with correct data and its options
+	drawGraph(chartType, data, options);
 };
 
 
