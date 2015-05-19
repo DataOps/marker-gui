@@ -185,6 +185,15 @@ Template.sidebar.rendered = function () {
 	"#type VennDiagram\n"+
 	"#title My Venn diagram";
 
+// 	"-- My Venn diagram\n"+
+// 	"#data\n"+ 
+// 		"\t'Set A', 1, 2, 3\n"+
+// 		"\t'Set B', 1, 4, 5\n"+
+// 		"\t'Set C', 1, 6, 7\n"+
+// 	"#type VennDiagram\n"+
+// 	"#title My Venn diagram";
+
+
 	// var tmpTxt =
 	// "-- My Venn diagram\n"+
 	// "#data\n"+ 
@@ -193,6 +202,7 @@ Template.sidebar.rendered = function () {
 	// 	"\t'Set C', 20\n"+
 	// "#type BarChart\n"+
 	// "#title My Venn diagram";	
+
 
 	var langTools = ace.require("ace/ext/language_tools");
 	aceEditor = ace.edit("editor");
