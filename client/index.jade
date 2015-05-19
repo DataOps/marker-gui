@@ -16,20 +16,28 @@ template(name="main")
 
 template(name="index")
 	
-	section#particles.relative.bg(style="min-height: 600px; background-image:url('/img/bg/splash-01.svg');")
-		.center-center
-			h1.center.spaced Here be screenshots
-			p.center Meet Marker. It's Robin Hood of data technology
+	//- section#particles.relative.bg(style="min-height: 600px; background-image:url('/img/bg/splash-01.svg');")
+	section#particles.relative.bg
+		//- (style="min-height: 600px; background-image:url('/img/frontpage.png'); background-size: 60% auto;")
+		//- .center-center
+		h1.center.spaced.nm.bold Marker
+		p.center The Robin Hood of data technology
+		img(src="/img/frontpage.png", alt="", style="width:800px; display:block; margin:auto;")
 
 	section.splash-section.relative.accent-bg(style="min-height: 600px;")
 		.bg.texture.full(style="background-image:url('/textures/oranges_white.png'); opacity:0.1;")
 		.center-center
 			h1.center.spaced
+				span.bold Simple, 
+				| yet Powerful.
+			img(src="/img/model2.png", alt="", style="width:800px; display:block; margin:auto;")
+			p.center.bold.mt2 Never again an Excel spreadsheet
+			//- h1.center.spaced
 				| When
 				span.bold.uppercase Life
 				br 
 				| Gives You Lemons
-			p.center You make lemonade
+			//- p.center You make lemonade
 
 	section
 		h1.center Try it for yourself!
@@ -96,7 +104,7 @@ template(name="sidebar")
 	//- p Or just drag a file onto the editor below!
 
 	.sidebar.show-sidebar
-		.relative.mt2
+		//- .relative.mt2
 			.btn-container.absolute.bottom
 				button.gui.btn-padding
 					| Gui
@@ -108,7 +116,7 @@ template(name="sidebar")
 					| Download Graph					
 				button.shoot.right.btn-padding
 					| Shoot					
-		#editor
+		#editor(style="border:1px solid rgba(0,0,0,0.2);")
 
 template(name="createView")
 	section.mt2.main-width
