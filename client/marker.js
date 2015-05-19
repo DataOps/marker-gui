@@ -211,12 +211,16 @@ Template.sidebar.rendered = function () {
 
 	var tmpTxt =
 	"-- Try overriding the title attribute\n"+
-	"#data Patrik 52\n"+
+	"#data\n"+
+		"\tPatrik 42\n"+
 		"\tJimmy 32\n"+
 		"\tMorhag 62\n"+
 		"\tJohn 12\n"+
+		"\n" +
 	"#type BarChart\n"+
+	"\n" +
 	"#color red\n"+
+	"\n" +
 	"@lowest\n"+
 	"\tlabel lowest\n";
 
