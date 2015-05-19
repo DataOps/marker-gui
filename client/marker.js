@@ -1,114 +1,71 @@
 
 var aceEditor;
 
-
-function formatParsedData (parsed) {
-	var data = {};
-	for (var i = 0; i < parsed.length; i++) {
-		data[parsed[i].type] = parsed[i].value;
-		// delete data[parsed[i].type].type;
-	};
-
-	// console.log(data)
-
-	return data;
-}
-
 function parse() {
 	var text = aceEditor.getValue();
     var parsed = parser.parse(text)
-    // var out = JSON.stringify(parsed, null, 4);
-    // console.log(out)
-
-
-
-    var output = formatParsedData(parsed);
+    //var out = JSON.stringify(parsed, null, 4);
+    //console.log(out)
 
     var data = [];
-    var cycleSize = 2;
-    for (var i = 0; i < output.data.length; i=i+cycleSize) {
-    	data.push({
-    		label: output.data[i].value,
-    		value: output.data[i+1].value
-    	})
-    };
+    var chartType = "";
 
-    var type = output.type;
+    for (var i = 0; i < parsed.length; i++) {
+        if (parsed[i].type == "data") {
+        	if (parsed[i].value[0][0] && parsed[i].value[0][0] !== "undefined") {
+        		// 2D array, we need to go deeper into the tree structure
+        		var dataArray = parsed[i].value;
 
+        		// Loop over all elements/arrays in data array
+        		for (var j = 0; j < dataArray.length; j++) {
+        			var temp = [];
 
-   // Deep copy for options
-   var options = $.extend(true, {}, output);
-   delete options.data;
+        			// Insert every data value into temporary array
+        			for (var k = 0; k < dataArray[j].length; k++) {
+        				temp[k] = dataArray[j][k].value;
+        			}
 
+	        		// Assume label in data[j][0]. Values in rest.
+	        		if (temp.length > 2) {
+	        			// Insert temp array into data array. Remove first element and add the rest
+        				data.push({label: temp.shift(), value: temp});
+        			} else {
+        				// Do not create new array, just return the values from temp array
+        				data.push({label: temp[0], value: temp[1]});
+        			}
+        		}
+        	} else {
+        		// Just get the values straight out of AST tree and insert into data
+	            for (var j = 0; j < parsed[i].value.length; j++) {
+	                if (parsed[i].value[i].type == "file") {
+	                    data = "";
+	                    data = parsed[i].value[0].value;
+	                    break;
+	                } else if (parsed[i].value[i].type == ("int" || "string" || "double")) {
+	                    data[j] = parsed[i].value[j].value;
+	                }
+	            }
+	        }
+        } else if (parsed[i].type == "type") {
+        	// Chech what chart type we want to draw
+            chartType = parsed[i].value;
+        }
+    }
 
-   drawGraph(type, data, options);
+    //console.log(data);
+
+    var options = {};
+
+    // Collect all options as title, color, label etc and insert to options array
+	for (var i = 0; i < parsed.length; i++) {
+		options[parsed[i].type] = parsed[i].value;
+	};
+	delete options.data;
+
+	// Draw the graph with correct data and its options
+	drawGraph(chartType, data, options);
 };
 
-// [Log] parsed output: [ (marker.js, line 10)
-//     {
-//         "type": "comment",
-//         "value": null
-//     },
-//     {
-//         "type": "data",
-//         "value": [
-//             {
-//                 "type": "string",
-//                 "value": "Patrik"
-//             },
-//             {
-//                 "type": "int",
-//                 "value": 52
-//             },
-//             {
-//                 "type": "string",
-//                 "value": "Jimmy"
-//             },
-//             {
-//                 "type": "int",
-//                 "value": 32
-//             },
-//             {
-//                 "type": "string",
-//                 "value": "Morhag"
-//             },
-//             {
-//                 "type": "int",
-//                 "value": 62
-//             },
-//             {
-//                 "type": "string",
-//                 "value": "John"
-//             },
-//             {
-//                 "type": "int",
-//                 "value": 12
-//             }
-//         ]
-//     },
-//     {
-//         "type": "type",
-//         "value": "barchart"
-//     },
-//     {
-//         "type": "color",
-//         "value": "red"
-//     },
-//     {
-//         "type": "lowest",
-//         "value": [
-//             {
-//                 "type": "string",
-//                 "value": "label"
-//             }
-//         ]
-//     },
-//     "lowest",
-//     {
-//         "type": "title",
-//         "value": "My Chart"
-//     }
-// ]
 
 
 var currentType;
@@ -223,6 +180,24 @@ Template.sidebar.rendered = function () {
 	"\n" +
 	"@lowest\n"+
 	"\tlabel lowest\n";
+
+// 	"-- My Venn diagram\n"+
+// 	"#data\n"+ 
+// 		"\t'Set A', 1, 2, 3\n"+
+// 		"\t'Set B', 1, 4, 5\n"+
+// 		"\t'Set C', 1, 6, 7\n"+
+// 	"#type VennDiagram\n"+
+// 	"#title My Venn diagram";
+
+	// var tmpTxt =
+	// "-- My Venn diagram\n"+
+	// "#data\n"+ 
+	// 	"\t'Set A', 10\n"+
+	// 	"\t'Set B', 15\n"+
+	// 	"\t'Set C', 20\n"+
+	// "#type BarChart\n"+
+	// "#title My Venn diagram";	
+
 
 	var langTools = ace.require("ace/ext/language_tools");
 	aceEditor = ace.edit("editor");
