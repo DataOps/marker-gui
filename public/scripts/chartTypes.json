@@ -10,4 +10,10 @@
     {
         "value": "#type",
         "name": "ScatterPlot"
-    }]
+    },
+    {
+        "value": "#type",
+        "name": "VennDiagram"
+    }
+]
+
