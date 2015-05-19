@@ -165,8 +165,26 @@ Template.sidebar.rendered = function () {
 
 	// "#data: 1,2,3,4,5,6,7,8,9,10,20,25,30,40,50\n"+
 
+	// var tmpTxt =
+	// "-- My Chord Chart\n"+
+	// "#data\n"+ 
+	// 	"\tDavid John 10\n"+
+	// 	"\tDavid Patrik 20\n"+
+	// 	"\tDavid David 30\n"+
+	// 	"\tPatrik David 40\n"+
+
+	// "#type ChordChart\n"+
+	// "#title My Chord Chart";
 
 	var tmpTxt =
+		"-- My Venn diagram\n"+
+		"#data\n"+ 
+			"\t'Set A', 1, 2, 3\n"+
+			"\t'Set B', 1, 4, 5\n"+
+			"\t'Set C', 1, 6, 7\n"+
+		"#type VennDiagram\n"+
+		"#title My Venn diagram";
+
 	// "-- Try overriding the title attribute\n"+
 	// "#data\n"+
 	// 	"\tPatrik 42\n"+
@@ -181,13 +199,24 @@ Template.sidebar.rendered = function () {
 	// "@lowest\n"+
 	// "\tlabel lowest\n";
 
-	"-- My Venn diagram\n"+
-	"#data\n"+ 
-		"\t'Set A', 1, 2, 3\n"+
-		"\t'Set B', 1, 4, 5\n"+
-		"\t'Set C', 1, 6, 7\n"+
-	"#type VennDiagram\n"+
-	"#title My Venn diagram";
+
+	// "-- My Venn diagram\n"+
+	// "#data\n"+ 
+	// 	"\t'Set A' 1 2 3\n"+
+	// 	"\t'Set B' 1 4 5\n"+
+	// 	"\t'Set C' 1 6 7\n"+
+	// "#type VennDiagram\n"+
+	// "#title My Venn diagram";
+
+// 	"-- My Venn diagram\n"+
+// 	"#data\n"+ 
+// 		"\t'Set A', 1, 2, 3\n"+
+// 		"\t'Set B', 1, 4, 5\n"+
+// 		"\t'Set C', 1, 6, 7\n"+
+// 	"#type VennDiagram\n"+
+// 	"#title My Venn diagram";
+
+
 
 	// var tmpTxt =
 	// "-- My Venn diagram\n"+
